@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.security.PublicKey;
 import java.util.List;
 
@@ -28,8 +29,12 @@ public class UserResource {
     //GET /USER
     @GetMapping("/users/{id}")
     public User retrieveUsers(@PathVariable int id) {
+        User user = service.findOne(id);
+        if(user== null){
+            throw new UserNotFoundException("id: "+ id);
+        }
 
-        return service.findOne(id);
+        return user;
 
     }
 
