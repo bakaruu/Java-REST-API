@@ -52,4 +52,11 @@ public class UserResource {
 
         return ResponseEntity.created(location).build();
     }
+
+    //DELETE /User
+    @DeleteMapping("/users/{id}")
+    public void deleteUsers(@PathVariable int id) {
+        service.deleteById(id);
+
+    }
 }

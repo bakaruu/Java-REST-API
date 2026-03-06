@@ -48,4 +48,22 @@ public class UserDaoService {
         return user;
     }
 
+
+    //Iterator mode.
+//    public void deleteById(int id) {
+//        Iterator<User> iterator = users.iterator();
+//        while (iterator.hasNext()) {
+//            User user = iterator.next();
+//            if (user.getId().equals(id)) {
+//                iterator.remove();
+//                break;
+//            }
+//        }
+//    }
+
+    //Delete user Functional programming.
+    public void deleteById(int id) {
+        Predicate<? super User> predicate = user -> user.getId().equals(id);
+        users.removeIf(predicate);
+    }
 }
