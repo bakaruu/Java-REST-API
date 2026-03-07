@@ -1,11 +1,20 @@
 package com.rest.webservices.restful_web_services.helloworld;
 
+import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Locale;
+
 @RestController
 public class HelloWorldController {
+
+    private MessageSource messageSource;
+
+    public HelloWorldController(MessageSource messageSource){
+        this.messageSource = messageSource;
+    }
 
     @GetMapping(path = "/hello-world")
     public String helloWorld (){
@@ -28,11 +37,12 @@ public class HelloWorldController {
         return new HelloWorldBean(String.format("Hello World, %s", name));
     }
 
-    // A partir de tomorrow empieza mi nuevo futuro. non stop programming para irme
-    // a Suiza a currar de programador 100% 7 meses de puro aprendizaje.
+    @GetMapping(path = "/hello-world-internationalized")
+    public String helloWorldInternationalized (Locale locale){
 
-    //lo prometido es deuda.
-
-    //hoy noo se pudo lol
+        return messageSource.getMessage("good.morning.message",
+                                        null, "Default Message", locale);
+//        return "hello World";
+    }
 }
  
