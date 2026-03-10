@@ -2,6 +2,7 @@ package com.rest.webservices.restful_web_services.filtering;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @JsonIgnoreProperties("field2")
 
@@ -12,14 +13,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 // prevents that
 public class SomeBean {
 
+    @JsonView(View.View1.class)
     private String fielf1;
 
     //Static filtering, password for example.
-    @JsonIgnore
+
+//    @JsonIgnore
+    @JsonView(View.View2.class)
     private String fielf2;
 
-
+    @JsonView({View.View1.class, View.View2.class})
     private String fielf3;
+
+
 
     public SomeBean(String fielf1, String fielf2, String fielf3) {
         this.fielf1 = fielf1;
